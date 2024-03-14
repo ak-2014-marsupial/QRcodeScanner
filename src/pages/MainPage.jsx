@@ -1,11 +1,12 @@
 import React from 'react';
 
 import css from "./Pages.module.css";
+import {ButtonHoldIncDecr} from "../components/QR_ScannerContainer/ButtonHoldIncrDecr/ButtonHoldIncDecr";
 
 const MainPage = () => {
     return (
         <div className={css.page} >
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, et explicabo odit quis sequi voluptates voluptatum. Aliquam consequatur consequuntur culpa deleniti eligendi laborum laudantium pariatur, quas, rerum tempore totam unde!</p>
+            <ButtonHoldIncDecr/>
         </div>
     );
 };

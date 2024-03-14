@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 import "./QRCode.css"
-import { ScanningLine} from "../components";
+import {ScanningLine} from "../components";
 import {QrMessage} from "../components/QR_ScannerContainer/QR_Message";
+import {Html5Qrcode} from "html5-qrcode";
 
-import {startScanner, stopScanner,resumeScanner} from "../components"
 
 const QrcodePage = () => {
     const [isEnabled, setEnabled] = useState(true);
@@ -16,10 +16,43 @@ const QrcodePage = () => {
     const html5QrCodeRef = useRef(null);
 
     // document.documentElement.style.setProperty("--ScannerWidth",300*(1+widthData/100));
+    console.log(showQrMessage);
+    const startScanner = () => {
 
+        if (html5QrCodeRef.current && html5QrCodeRef.current.getState() === 2) {
+            // console.log("Здесь можно выключить кнопку камеры и сканирования");
+            return
+        }
 
+        const config = {fps: 10, qrbox: {width: 200, height: 200}};
+        let html5QrCode = new Html5Qrcode("qrCodeContainer");
+        html5QrCodeRef.current = html5QrCode;
+
+        html5QrCode.start({facingMode: "environment"}, config, qrCodeSuccess)
+            .then(() => {
+                setScanning(true)
+
+            })
+            .catch((err) => {
+                console.log("Scanner error", err)
+            });
+
+    }
+
+    const stopScanner = () => {
+        if (html5QrCodeRef.current && html5QrCodeRef.current.getState() !== 1) {
+            html5QrCodeRef.current
+                .stop()
+                .then((ignore) => console.log("Scanner stop"))
+                .catch((err) => console.log("Scanner error"));
+            setEnabled(false);
+            setScanning(false);
+
+        }
+    };
 
     const pauseScanner = () => {
+        console.log("Pause",html5QrCodeRef.current.getState());
 
         if (html5QrCodeRef.current && html5QrCodeRef.current.getState() === 2) {
             html5QrCodeRef.current.pause();
@@ -27,28 +60,32 @@ const QrcodePage = () => {
         }
     }
 
+    const resumeScanner = () => {
+        if (html5QrCodeRef.current && html5QrCodeRef.current.getState() === 3) {
+            html5QrCodeRef.current.resume();
+            setScanning(true);
+            setShowQrMessage(false)
+        }
+    }
 
     const qrCodeSuccess = (decodedText) => {
+
         setQrMessage(decodedText);
         setShowQrMessage(true);
-        pauseScanner(html5QrCodeRef, setScanning);
+        pauseScanner();
         console.log(`Code matched = ${decodedText}`);
+
     };
 
     useEffect(() => {
-
         if (isEnabled) {
-            startScanner(html5QrCodeRef, setScanning, setQrMessage, setShowQrMessage, pauseScanner);
-            if (html5QrCodeRef.current.getState() === 2) {
-
-                setScanning(true)
-            }
-            ;
+            startScanner();
+            if (html5QrCodeRef.current.getState() === 2) setScanning(true);
         }
 
         return () => {
             if (html5QrCodeRef.current && html5QrCodeRef.current.getState() !== 1) {
-                stopScanner(html5QrCodeRef, setEnabled, setScanning);
+                stopScanner();
             }
         }
     }, [isEnabled]);
@@ -59,7 +96,6 @@ const QrcodePage = () => {
             <div className={"wrapper"}>
                 <div id="qrCodeContainer"/>
                 <ScanningLine isScanning={isScanning} timeout={3000}/>
-
             </div>
 
             {/*<div>*/}
@@ -69,13 +105,20 @@ const QrcodePage = () => {
 
             <div className={"wrapper_message"}>
                 <div className="qr-message">
-                    {qrMessage && <QrMessage mess={qrMessage} isOpen={showQrMessage}/>}
+                    {
+                        <QrMessage mess={qrMessage}
+                                   resumeScanner={resumeScanner}
+                                   showQrMessage={showQrMessage}
+                                   setShowQrMessage={setShowQrMessage}
+                        />}
                 </div>
             </div>
+
+
             {isScanning ?
                 <button onClick={pauseScanner}>Scanning Stop</button>
                 :
-                <button onClick={()=>resumeScanner(html5QrCodeRef, setScanning, setShowQrMessage)}>Scanning Run</button>
+                <button onClick={resumeScanner}>Scanning Run</button>
             }
 
 
