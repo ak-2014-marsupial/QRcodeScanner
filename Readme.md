@@ -1,0 +1,1 @@
+#QR, bar code scanner
