@@ -4,7 +4,7 @@ import css from "./ButtonHoldIncDec.module.css"
 const ButtonHoldIncDecr = () => {
     const [value, setValue] = useState(3);
     const [intervalId, setIntervalId] = useState(null);
-    const [incrementSpeed, setIncrementSpeed] = useState(100);
+    const [incrementSpeed, setIncrementSpeed] = useState(150);
     const [incrementAmount, setIncrementAmount] = useState(1);
 
     const startIncrement = () => {
@@ -14,10 +14,10 @@ const ButtonHoldIncDecr = () => {
         setIntervalId(id);
     }
 
-    const startDecrement=()=>{
+    const startDecrement = () => {
         const id = setInterval(() => {
             setValue((prev) => {
-                if(prev===0) return 0
+                if (prev === 0) return 0
 
                 return prev - incrementAmount;
             })
@@ -35,24 +35,37 @@ const ButtonHoldIncDecr = () => {
         setIncrementAmount(1);
         startIncrement();
     }
-    const handleDecrement=()=>{
+    const handleTouchIncrement = () => {
+        setIncrementAmount(1);
+        startIncrement();
+    }
+    const handleDecrement = () => {
         setIncrementAmount(1);
         startDecrement();
     }
 
+    const handleTouchDecrement = () => {
+        setIncrementAmount(1);
+        startDecrement();
+    }
     const handleMouseUp = () => {
         stopIncrement();
+    }
+    const handleTouchEnd = () => {
+        stopIncrement()
     }
 
     const handleMouseLeave = () => {
         stopIncrement();
     }
-
+    const handleTouchCancel = () => {
+        stopIncrement();
+    }
 
 
     useEffect(() => {
-        return ()=>{
-            if(intervalId){
+        return () => {
+            if (intervalId) {
                 clearInterval(intervalId)
             }
         }
@@ -66,6 +79,9 @@ const ButtonHoldIncDecr = () => {
                 onMouseDown={handleIncrement}
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseLeave}
+                onTouchStart={handleTouchIncrement}
+                onTouchEnd={handleTouchEnd}
+                onTouchCancel={handleTouchCancel}
 
             ><h3>+</h3></button>
 
@@ -73,6 +89,10 @@ const ButtonHoldIncDecr = () => {
                 onMouseDown={handleDecrement}
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseLeave}
+                onTouchStart={handleTouchDecrement}
+                onTouchEnd={handleTouchEnd}
+                onTouchCancel={handleTouchCancel}
+
 
             ><h3>-</h3></button>
 
