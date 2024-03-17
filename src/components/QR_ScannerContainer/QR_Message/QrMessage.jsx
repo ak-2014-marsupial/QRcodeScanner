@@ -2,7 +2,7 @@ import React from 'react';
 
 import css from "./QrMessage.module.css"
 import {ButtonHoldIncDecr} from "../ButtonHoldIncrDecr";
-import {Product} from "../ Product";
+import {Product} from "../Product";
 import {normalizeMess} from "./UtilsQrMessage";
 
 const QrMessage = ({mess, showQrMessage, resumeScanner, setShowQrMessage}) => {
@@ -19,9 +19,8 @@ const QrMessage = ({mess, showQrMessage, resumeScanner, setShowQrMessage}) => {
     return (
         <>
             <div className={css.qr_message}>
-                {normalizeMess(mess)}
-                <Product str={normalizeMess(mess)}/>
-                <ButtonHoldIncDecr/>
+                <Product mess={mess}/>
+                <ButtonHoldIncDecr />
                 <button onClick={handleClick}>NEXT</button>
             </div>
 
