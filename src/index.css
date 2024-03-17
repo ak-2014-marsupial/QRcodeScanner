@@ -37,3 +37,18 @@ a{
   --ScannerWidth:300px;
   --ScannerHeight:300px;
 }
+
+
+@media(hover: hover){
+  button:hover {
+    box-shadow: 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover),  0 0 10px var(--accent-hover) ;
+    transform: scale(0.92);
+  }
+}
+
+@media (hover:none){
+  button:active {
+    box-shadow: 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover),  0 0 10px var(--accent-hover) ;
+    transform: scale(0.92);
+  }
+}

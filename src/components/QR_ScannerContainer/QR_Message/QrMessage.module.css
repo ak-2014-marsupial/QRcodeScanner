@@ -22,10 +22,10 @@
     background-color: var(--background);
 }
 
-.qr_message button:hover{
-    box-shadow: 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover),  0 0 10px var(--accent-hover) ;
-    transform: scale(0.92);
-}
+/*.qr_message button:hover{*/
+/*    box-shadow: 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover), 0 0 10px var(--accent-hover),  0 0 10px var(--accent-hover) ;*/
+/*    transform: scale(0.92);*/
+/*}*/
 
 @keyframes show_message {
     0%{

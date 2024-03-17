@@ -50,23 +50,24 @@ video {
 }
 .wrapper_message{
     position: absolute;
-    top:5%;
+    top:-10%;
     width: 80%;
+    z-index: 100;
 }
 
-.start-button {
-    position: absolute;
-    top: 1.5em;
-    right: 1.5em;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    background-color: var(--star-primary);
-    border: 0;
-    border-radius: 7px;
-    font-size: 20px;
-    color: #fff;
-}
+/*.start-button {*/
+/*    position: absolute;*/
+/*    top: 1.5em;*/
+/*    right: 1.5em;*/
+/*    width: 40px;*/
+/*    height: 40px;*/
+/*    padding: 0;*/
+/*    background-color: var(--star-primary);*/
+/*    border: 0;*/
+/*    border-radius: 7px;*/
+/*    font-size: 20px;*/
+/*    color: #fff;*/
+/*}*/
 
 datalist{
     display: flex;
@@ -93,4 +94,6 @@ button{
     padding: 0.5em;
     font-size: 1em;
     border-radius: 0.5em;
+    padding: 1em;
+    font-size: 1.8em;
 }

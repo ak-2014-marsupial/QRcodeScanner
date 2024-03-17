@@ -4,7 +4,7 @@ import css from "./ButtonHoldIncDec.module.css"
 const ButtonHoldIncDecr = () => {
     const [value, setValue] = useState(3);
     const [intervalId, setIntervalId] = useState(null);
-    const [incrementSpeed, setIncrementSpeed] = useState(150);
+    const [incrementSpeed, setIncrementSpeed] = useState(200);
     const [incrementAmount, setIncrementAmount] = useState(1);
 
     const startIncrement = () => {
