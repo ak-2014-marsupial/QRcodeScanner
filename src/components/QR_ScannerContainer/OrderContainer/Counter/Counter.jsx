@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import css from "./ButtonHoldIncDec.module.css"
+import css from "./Couter.module.css"
 
-const ButtonHoldIncDecr = () => {
-    const [value, setValue] = useState(3);
+const Counter = ({value,setValue}) => {
     const [intervalId, setIntervalId] = useState(null);
     const [incrementSpeed, setIncrementSpeed] = useState(200);
     const [incrementAmount, setIncrementAmount] = useState(1);
@@ -18,7 +17,6 @@ const ButtonHoldIncDecr = () => {
         const id = setInterval(() => {
             setValue((prev) => {
                 if (prev === 0) return 0
-
                 return prev - incrementAmount;
             })
         }, incrementSpeed);
@@ -100,4 +98,4 @@ const ButtonHoldIncDecr = () => {
     );
 };
 
-export {ButtonHoldIncDecr};
+export {Counter};

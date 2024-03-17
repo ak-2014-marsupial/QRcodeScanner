@@ -48,7 +48,7 @@ const Header = () => {
                     <li className={css.nav_item}> <NavLink to={"main"}>Main</NavLink> </li>
                     <li className={css.nav_item}><NavLink to={"about"}>About</NavLink> </li>
                     <li className={css.nav_item}> <NavLink to={"qrcode"}>QR Code</NavLink>   </li>
-                    <li className={css.nav_item}><NavLink to={"login"}>Login</NavLink></li>
+                    <li className={css.nav_item}><NavLink to={"order"}>Order</NavLink></li>
                     <li className={css.nav_item}><ChangeTheme/></li>
                 </ul>
             </nav>

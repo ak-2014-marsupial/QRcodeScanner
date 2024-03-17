@@ -1,13 +1,11 @@
 import React from 'react';
 
 import css from "./Product.module.css";
-import {getItemById} from "../QR_Message";
 
-const Product = ({mess}) => {
-    const item =getItemById(mess);
+const Product = ({item}) => {
 
     return (
-        <div >
+        <div>
             <div>{item.code}</div>
             <div className={css.name}>{item.name}</div>
             <div className={css.wrapper_img}>
