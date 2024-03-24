@@ -1,8 +1,7 @@
 import { createHashRouter, Navigate} from "react-router-dom";
 import React from "react";
-import { MainPage, OrderPage, QrcodePage} from "./pages";
+import {AboutPage, MainPage, OrderPage, QrcodePage} from "./pages";
 import {MainLayout} from "./layouts";
-import {AboutPage} from "./pages/AboutPage";
 
 // const router= createBrowserRouter([
 const router= createHashRouter([

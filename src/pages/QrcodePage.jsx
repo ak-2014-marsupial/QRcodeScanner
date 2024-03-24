@@ -1,8 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 import "./QRCode.css"
-import {ScanningLine} from "../components";
-import {QrMessage} from "../components/QR_ScannerContainer/QR_Message";
+import {QrCodeContext, QrMessage, ScanningLine} from "../components";
 import {Html5Qrcode} from "html5-qrcode";
 
 
@@ -10,8 +9,8 @@ const QrcodePage = () => {
     const [isEnabled, setEnabled] = useState(true);
     const [qrMessage, setQrMessage] = useState("");
     const [showQrMessage, setShowQrMessage] = useState(false);
-    const [widthData, setWidthData] = useState(0);
-    const [isScanning, setScanning] = useState(false)
+    const [isScanning, setScanning] = useState(false);
+    const [value, setValue] = useState(3);
 
     const html5QrCodeRef = useRef(null);
 
@@ -52,7 +51,7 @@ const QrcodePage = () => {
     };
 
     const pauseScanner = () => {
-        console.log("Pause",html5QrCodeRef.current.getState());
+        console.log("Pause", html5QrCodeRef.current.getState());
 
         if (html5QrCodeRef.current && html5QrCodeRef.current.getState() === 2) {
             html5QrCodeRef.current.pause();
@@ -69,7 +68,6 @@ const QrcodePage = () => {
     }
 
     const qrCodeSuccess = (decodedText) => {
-
         setQrMessage(decodedText);
         setShowQrMessage(true);
         pauseScanner();
@@ -89,7 +87,15 @@ const QrcodePage = () => {
             }
         }
     }, [isEnabled]);
+    const qrCodeCtxValue = {
+        mess: qrMessage,
+        resumeScanner,
+        showQrMessage,
+        setShowQrMessage,
+        value,
+        setValue
 
+    };
 
     return (
         <div className="scaner">
@@ -98,19 +104,12 @@ const QrcodePage = () => {
                 <ScanningLine isScanning={isScanning} timeout={3000}/>
             </div>
 
-            {/*<div>*/}
-            {/*    <div>Width {300 * (1 + widthData / 100)}</div>*/}
-            {/*    <InputTypeRange data={widthData} setData={setWidthData}/>*/}
-            {/*</div>*/}
-
             <div className={"wrapper_message"}>
                 <div className="qr-message">
-                    {
-                        <QrMessage mess={qrMessage}
-                                   resumeScanner={resumeScanner}
-                                   showQrMessage={showQrMessage}
-                                   setShowQrMessage={setShowQrMessage}
-                        />}
+                    <QrCodeContext.Provider value={qrCodeCtxValue}>
+                        <QrMessage/>
+                    </QrCodeContext.Provider>
+
                 </div>
             </div>
 

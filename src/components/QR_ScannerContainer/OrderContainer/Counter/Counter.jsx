@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import css from "./Couter.module.css"
+import {QrCodeContext} from "../../store";
 
-const Counter = ({value,setValue}) => {
+const Counter = () => {
     const [intervalId, setIntervalId] = useState(null);
     const [incrementSpeed, setIncrementSpeed] = useState(200);
     const [incrementAmount, setIncrementAmount] = useState(1);
+    const {value, setValue} = useContext(QrCodeContext);
 
     const startIncrement = () => {
         const id = setInterval(() => {
