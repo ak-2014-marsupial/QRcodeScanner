@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import {RouterProvider} from "react-router-dom";
 import {router} from "./router";
+import {BarCode} from "./components/BarCode";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <RouterProvider router={router}/>
+    <BarCode/>
+  // <RouterProvider router={router}/>
 );
 
